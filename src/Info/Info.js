@@ -1,7 +1,9 @@
 import Tool from '../DevTools/Tool'
 import defInfo from './defInfo'
-import { each, isFn, isUndef, cloneDeep } from '../lib/util'
+import { each, isFn, isUndef, cloneDeep, detectOs, escape, detectBrowser } from '../lib/util'
 import evalCss from '../lib/evalCss'
+
+const browser = detectBrowser()
 
 export default class Info extends Tool {
   constructor() {
@@ -12,12 +14,42 @@ export default class Info extends Tool {
     this.name = 'info'
     this._tpl = require('./Info.hbs')
     this._infos = []
+    this._locationHref = escape(location.href);
+    this._userAgent = navigator.userAgent;
+    this._device = {
+      screenWidth: screen.width,
+      screenHeight: screen.height,
+      windowInnerWidth: window.innerWidth,
+      windowInnerHeight: window.innerHeight,
+      devicePixelRatio: window.devicePixelRatio
+    };
+    this._system = {
+      detectOs: detectOs(),
+      browserName: browser.name,
+      browserVersion: browser.version
+    };
   }
   init($el) {
     super.init($el)
 
     this._addDefInfo()
+    this._bindEvent()
   }
+
+  _bindEvent() {
+      const $el = this._$el
+      $el
+        .on('click', '.eruda-icon-refresh', () => {
+          console.log('refresh');
+          this.refreshHref()._render()
+        })
+  }
+
+  refreshHref() {
+    this._locationHref = escape(location.href);
+    return this;
+  }
+
   destroy() {
     super.destroy()
 
@@ -78,6 +110,10 @@ export default class Info extends Tool {
   }
   _render() {
     const infos = []
+    const locationHref = this._locationHref
+    const userAgent = this._userAgent
+    const device = this._device
+    const system = this._system;
 
     each(this._infos, ({ name, val }) => {
       if (isFn(val)) val = val()
@@ -85,7 +121,13 @@ export default class Info extends Tool {
       infos.push({ name, val })
     })
 
-    this._renderHtml(this._tpl({ infos }))
+    this._renderHtml(this._tpl({ 
+      infos,
+      locationHref,
+      userAgent,
+      device,
+      system
+    }))
   }
   _renderHtml(html) {
     if (html === this._lastHtml) return

@@ -1,8 +1,60 @@
 <ul>
-  {{#each infos}}
-    <li>
-      <h2 {{{class 'title'}}}>{{name}}</h2>
-      <div {{{class 'content'}}}>{{{val}}}</div>
-    </li>
-  {{/each}}
+  <li>
+    <h2 {{{class 'title'}}}>
+      Location
+      <span {{{class 'icon-refresh'}}}></span>
+    </h2>
+    <div {{{class 'content'}}}>{{{locationHref}}}</div>
+  </li>
+
+  <li>
+    <h2 {{{class 'title'}}}>
+      User Agent
+    </h2>
+    <div {{{class 'content'}}}>{{{userAgent}}}</div>
+  </li>
+
+  <li>
+    <h2 {{{class 'title'}}}>
+      Device
+    </h2>
+    <div {{{class 'content'}}}>
+      <table>
+        <tbody>
+          <tr>
+            <td class="eruda-device-key">screen</td>
+            <td>{{device.screenWidth}} * {{device.screenHeight}}</td>
+          </tr>
+          <tr>
+            <td>viewport</td>
+            <td>{{device.windowInnerWidth}} * {{device.windowInnerHeight}}</td>
+          </tr>
+          <tr>
+            <td>pixel ratio</td>
+            <td>{{device.devicePixelRatio}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </li>
+
+  <li>
+    <h2 {{{class 'title'}}}>
+      System
+    </h2>
+    <div {{{class 'content'}}}>
+      <table>
+        <tbody>
+          <tr>
+            <td class="eruda-system-key">os</td>
+            <td>{{system.detectOs}}</td>
+          </tr>
+          <tr>
+            <td>browser</td>
+            <td>{{system.browserName}} {{system.browserVersion}}</td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </li>
 </ul>
