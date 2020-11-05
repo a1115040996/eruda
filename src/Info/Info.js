@@ -58,9 +58,15 @@ export default class Info extends Tool {
 
   // 复制location链接
   copyLocationHref() {
-    const targetEl = this._$el.find('.eruda-copy-el')[0];
+    const locationContentEl = this._$el.find('.eruda-location-content')[0];
+    const defaultColor = locationContentEl.style.color;
+    locationContentEl.style.color = '#1a73e8'
+    const targetEl = this._$el.find('.eruda-copy-el')[0]
     targetEl.select()
     document.execCommand('copy', false)
+    setTimeout(() => {
+      locationContentEl.style.color = defaultColor
+    }, 200);
   }
 
   refreshHref() {
