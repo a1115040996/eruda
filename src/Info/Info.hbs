@@ -3,8 +3,10 @@
     <h2 {{{class 'title'}}}>
       Location
       <span {{{class 'icon-refresh'}}}></span>
+      <span {{{class 'icon-tool'}}}></span>
     </h2>
     <div {{{class 'content'}}}>{{{locationHref}}}</div>
+    <input {{{class 'copy-el'}}} type="text" value="{{{locationHref}}}" readonly="true" />
   </li>
 
   <li>
@@ -53,7 +55,7 @@
             <td>browser</td>
             <td>{{system.browserName}} {{system.browserVersion}}</td>
           </tr>
-          </tbody>
+        </tbody>
       </table>
     </div>
   </li>

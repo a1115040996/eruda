@@ -1,7 +1,7 @@
 @import '../style/variable';
 @import '../style/mixin';
 
-#info {
+#performance {
   @include overflow-auto(y);
   li {
     margin: 10px;
@@ -10,19 +10,13 @@
     .content {
       padding: $padding;
     }
-    .copy-el{
-      position: absolute;
-      left: -100%;
-    }
     .title {
       padding-bottom: 0;
       font-size: $font-size-l;
       color: var(--accent);
-      .icon-refresh,
-      .icon-tool{
+      .icon-refresh{
         vertical-align: middle;
         float: right;
-        margin-left: 15px;
       }
     }
     .content {
